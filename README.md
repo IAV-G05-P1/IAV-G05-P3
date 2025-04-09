@@ -76,3 +76,23 @@ Adjuntamos una imagen esquematizada sobre su comportamiento, donde se explica br
       # Otherwise just return the current state's actions.
       else:
         return currentState.getActions()
+
+
+## John Lemon
+
+Como el árbol de comportamiento de John Lemon era algo complicado, decidimos separarlo por partes. Además del árbol principal habrá otro para la toma de decisiones cuando hay fantasmas cerca, y otro para eliminar las estátuas que se encuentre por el camino.
+
+### Comportaminto base
+
+
+### Destruir las estátuas
+
+![alt text](image-1.png)
+
+Este gráfico enseña una manera simplificada de la toma de decisiones para empujar el tótem.
+
+Primero de todo, se asegura que puede llegar en línea recta desde el totem hasta la estátua. Si no puede, recalcula un punto más cercano en la ruta e intenta ir a dicho punto lanzando el arbol de nuevo de manera recursiva. 
+Una vez sabe a que punto puede ir, mirará si se puede colocar detrás del tótem para empujarlo, y lo intentará desatascar de ser así. 
+Al colocarse detrás del totem solo le quedará empujarlo hasta la estátua (o hasta el checkpoint si estamos en una llamada recursiva). Si en algún momento deja de estar detrás de la estátua simplemente se recolocará detrás de nuevo y la seguirá empujando.
+
+### Evadir fantasmas
