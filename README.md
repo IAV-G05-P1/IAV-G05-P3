@@ -21,3 +21,58 @@ Los recursos de terceros utilizados son de uso público.
   * com.unity.postprocessing@3.2.2
   * com.unity.render-pipelines.universal@14.0.7
 * Behavior Designer 1.7.12, incluyendo Tutorials y Samples descargados desde la web de Opsive
+
+
+## Documentación
+En esta ocasión, la práctica pide que implementemos comportamientos basados en la toma de decisiones, principalmente.
+En algunos enemigos se usará el sistema de máquina de estados para definir su comportamiento, y el jugador usará un sistema de comportamiento basado en árboles.
+
+## Fantasmas
+En este juego están las gárgolas, que son estáticas y no cambian su posición. Pero luego están los fantasmas, que sí se mueven y persiguen al jugador.
+Basándonoes en el modelo de máquina de estados, tenemos 3 estados principales:
+
+- Patrullar: Se dedica a deambular por una ruta, comprobando si encuentra al jugador.
+- Investigar: Comprueba si hay algo sospechoso en una estatua.
+- Perseguir: Trata de atrapar al jugador una vez lo ha visto.
+
+Adjuntamos una imagen esquematizada sobre su comportamiento, donde se explica brevemente la transición entre estados: 
+![alt text](image.png)
+
+### Pseudocódigo
+
+class StateMachine:
+  # We're in one state at a time.
+  initialState: State
+  currentState: State = initialState
+  
+  
+  # Checks and applies transitions, returning a list of actions.
+  function update() -> Action[]:
+    # Assume no transition is triggered.
+    triggered: Transition = null
+    
+    # Check through each transition and store the first one that triggers.
+    for transition in currentState.getTransitions():
+      if transition.isTriggered():
+        triggered transition
+        break
+    
+
+    # Check if we have a transition to fire.
+    if triggered:
+      # Find the target state.
+      targetState = triggered.getTargetState()
+
+      # Add the exit action of the old state, the
+      # transition action and the entry for the new state.
+      actions = currentState.getExitActions()
+      actions += triggered.getActions()
+      actions += targetState.getEntryActions()
+    
+      # Complete the transition and return the action list.
+      currentState = targetState
+      return actions
+    
+    # Otherwise just return the current state's actions.
+    else:
+      return currentState.getActions()
