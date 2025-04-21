@@ -44,6 +44,13 @@ Como el árbol de comportamiento de John Lemon era algo complicado, decidimos se
 
 ### Comportaminto base
 
+![alt text](image-3.png)
+
+Este gráfico enseña una manera simplificada de la toma de decisiones a la hora de moverse.
+
+Antes de nada, comprueba que no hay fantasmas que le pongan en peligro. Si ese fuera el caso, llamaría al sub-árbol para evadir fantasmas. 
+
+Si no los hubiera, intentaría ir hacia la salida, mientras el camino esté despejado. En caso de que algún tótem le bloquease el camino, llamaría al sub-árbol de romper estatuas.
 
 ### Destruir las estátuas
 
@@ -58,3 +65,9 @@ Una vez sabe a que punto puede ir, mirará si se puede colocar detrás del tóte
 Al colocarse detrás del totem solo le quedará empujarlo hasta la estátua (o hasta el checkpoint si estamos en una llamada recursiva). Si en algún momento deja de estar detrás de la estátua simplemente se recolocará detrás de nuevo y la seguirá empujando.
 
 ### Evadir fantasmas
+
+![alt text](image-2.png)
+
+Este gráfico enseña una manera simplificada de la toma de decisiones para huir de los fantasmas.
+
+Primero se pregunta si hay algún sitio en el que esconderse. Si lo hay, intentará esconderse ahí. De no ser ese el caso, huirá.
