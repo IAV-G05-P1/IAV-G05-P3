@@ -10,14 +10,8 @@ public class WaypointPatrol : MonoBehaviour
 
     int m_CurrentWaypointIndex;
 
-    public int getCurrentWayPointIndex()
-    {
-        return m_CurrentWaypointIndex;
-    }
-
     void Start ()
     {
-        m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
         navMeshAgent.SetDestination (waypoints[0].position);
     }
 
